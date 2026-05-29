@@ -84,7 +84,9 @@ def test_save_pretrained_state_dict_matches(tmp_path):
         model, run_name='run1', config=TINY_OMEGACONF, cache_dir=tmp_path
     )
     loaded = torch.load(
-        _ckpt_root(tmp_path) / 'run1' / 'weights.pt', map_location='cpu'
+        _ckpt_root(tmp_path) / 'run1' / 'weights.pt',
+        map_location='cpu',
+        weights_only=True,
     )
     for key in model.state_dict():
         torch.testing.assert_close(model.state_dict()[key], loaded[key])

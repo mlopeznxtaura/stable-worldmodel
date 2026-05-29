@@ -77,7 +77,9 @@ def load_pretrained(name: str, cache_dir: str = None, extra_args=None):
     cache_dir = get_cache_dir(cache_dir, sub_folder='checkpoints')
     ensure_dir_exists(cache_dir)
     checkpoint_path, config = _resolve(name, cache_dir)
-    state_dict = torch.load(checkpoint_path, map_location='cpu')
+    state_dict = torch.load(
+        checkpoint_path, map_location='cpu', weights_only=True
+    )
 
     # assume keys with the dotted notation
     if extra_args is not None:
