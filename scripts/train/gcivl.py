@@ -853,7 +853,8 @@ def run(cfg):
 
     # load value function weights
     checkpoint = torch.load(
-        f'{cache_dir}/{cfg.output_model_name}_value_weights.ckpt'
+        f'{cache_dir}/{cfg.output_model_name}_value_weights.ckpt',
+        weights_only=True,
     )
     ivl_value_model.load_state_dict(checkpoint['state_dict'])
 
